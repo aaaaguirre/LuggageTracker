@@ -9,9 +9,11 @@
 		export let data;
 
 	
-		let luggages = data.luggages;
+		let details = data.details;
 
 		let search_text = '';
+
+		console.log('data: ', data)
 
 		let events = writable([...data.events])
 	
@@ -71,9 +73,10 @@
 			table_sort[col] = !table_sort[col];
 
 			const sorted = await db.get_all_events(db_sort_col.table_sort[col]);
-		}
 
-		$events = sorted;
+
+			$events = sorted;
+		}
 
 		console.log('${col} ; ${table_sort[col]}')
 
@@ -92,7 +95,7 @@
 				<div id="luggage" class="list-group">
 					<!-- luggage links -->
 					<button on:click={() => filterByLuggage()} class="list-group-item list-group-item-action">All Luggage</button>
-					{#each luggages as luggage}
+					{#each details as luggage}
 						<button on:click={() => {filterByLuggage(Number(luggage.luggage_id))}} class="list-group-item list-group-item-action">
 							{luggage.luggage_id}
 						</button>
@@ -133,7 +136,7 @@
 							{#each $events as event}
 								<tr>
 									<td><a href="/event_details/{event.events_id}">{event.events_id}</a></td>
-									<td>{format_timestamp(event.luggage_id)}</td>
+									<td>{event.luggage_id}</td>
 									<td>{event.owner_id}</td>
 									<td>{event.checked_in}</td>
 									<td>{event.status}</td>

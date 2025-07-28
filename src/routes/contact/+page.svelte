@@ -1,37 +1,30 @@
-<script>
+<!DOCTYPE html>
+
+<html lang="en">
 
  
 
-    import { preventDefault } from "svelte/legacy";
+<head>
 
- 
+    <meta charset="UTF-8">
 
-</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<h1>Contact us</h1>
+    <title>Contact Us</title>
 
-
-
-
-<style>
-
-    h1{
-
-        color: pink;
-
-        text-align: center;
-
-    }
-
- 
-
-</style>
-
- 
-
-<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+
+        h1 {
+
+            color: pink;
+
+            text-align: center;
+
+        }
+
+ 
 
         body {
 
@@ -41,9 +34,9 @@
 
             margin: 20px;
 
-            padding-bottom: 100px; /* Space for footer */
+            padding-bottom: 100px;
 
-            min-height: 100vh; /* Ensures the body takes at least the full height of the screen */
+            min-height: 100vh;
 
             display: flex;
 
@@ -51,27 +44,27 @@
 
             justify-content: space-between;
 
+            background-color: #f9f9f9;
+
         }
+
+ 
 
         .container {
 
-            max-width: 500px;
+            width: 50%;
 
             margin: auto;
 
             padding: 20px;
 
-            border: 2px solid black;
-
-            border-radius: 10px;
-
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2)
-
-            margin-bottom: 100px;
-
         }
 
-        input, textarea {
+ 
+
+        input,
+
+        textarea {
 
             width: 100%;
 
@@ -79,15 +72,17 @@
 
             margin: 5px 0;
 
-            border: 2px solid black; /* Adds solid black border */
+            border: 2px solid black;
 
-            border-radius: 5px; /* Optional: Makes edges slightly rounded */
+            border-radius: 5px;
 
         }
 
-        button {
+ 
 
-            background: black;
+        .dark-pink-button {
+
+            background-color: #C2185B;
 
             color: white;
 
@@ -95,7 +90,19 @@
 
             border: none;
 
+            border-radius: 5px;
+
+            font-weight: bold;
+
             cursor: pointer;
+
+        }
+
+ 
+
+        .dark-pink-button:hover {
+
+            background-color: #AD1457;
 
         }
 
@@ -103,7 +110,7 @@
 
         footer {
 
-            background-color: #f7c6d5; /* Light pink background */
+            background-color: #f7c6d5;
 
             color: black;
 
@@ -115,99 +122,19 @@
 
             bottom: 0;
 
-            width: 100%
-
-        }
-
- 
-
-        #formMessage {
-
-            margin-top: 15px;
-
-            font-size: 18px;
+            width: 100%;
 
         }
 
     </style>
 
-    <script>
-
-        fucntion validateForm(event) {
+</head>
 
  
 
-            event.preventDefault();
+<body>
 
- 
-
-            const name = document.getElementById("name").value;
-
-            if (name == "") {
-
-                alert("Name must be filled out.");
-
-                document.getElementById("name").focus();
-
-                return false;
-
-            }
-
-       
-
-        }
-
- 
-
-        // check if email is valid
-
-        const email = document.getElementById("email").value;
-
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zAZ]{2,4}$/;
-
-        if (!emailPattern.test(email)) {
-
-            alert("Please enter a valid email address.");
-
-            document.getElementById("email").focus();
-
-            return false;
-
-        }
-
- 
-
-        // check is message is provided
-
-        const message = document.getElementById("message").value;
-
-        if (message == "") {
-
-            alert("Message must be filled out to solve your issue.");
-
-            document.getElementById("message").focus();
-
-            return false;
-
-        }
-
- 
-
-        // If validation is successful, show success message and clear form
-
-        document.getElementById("formMessage").innerHTML = "Your message has been sent successfully!";
-
-        document.getElementById("formMessage").style.color = "green";
-
-        document.getElementById("name").value = ""; // clear the name field
-
-        document.getElementById("email").value = ""; // clear email field
-
-        document.getElementById("message").value = ""; // clear message field
-
-        return false;
-
-    </script>
+    <h1>Contact us</h1>
 
  
 
@@ -219,40 +146,108 @@
 
  
 
-        <form method="POST" action="?/submit">
+        <form id="contactForm" class="row g-3 needs-validation" novalidate>
 
-            <input type="text" name="name" placeholder="Your name" required>
+            <div class="col-md-6">
 
-            <input type="email" name="email" placeholder="Your email" required>
+                <label for="name" class="form-label"><b>Name:</b></label>
 
-            <textarea name="message" placeholder="Your message" required></textarea>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
 
-            <button type="submit">Submit</button>
+                <div class="invalid-feedback">Please provide your name.</div>
+
+            </div>
+
+ 
+
+            <div class="col-md-6">
+
+                <label for="email" class="form-label"><b>Email:</b></label>
+
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+
+                <div class="invalid-feedback">Please provide a valid email address.</div>
+
+            </div>
+
+ 
+
+            <div class="col-12">
+
+                <label for="message" class="form-label"><b>Message:</b></label>
+
+                <textarea id="message" class="form-control" placeholder="Type your message here" rows="5" required></textarea>
+
+                <div class="invalid-feedback">Please enter a message.</div>
+
+            </div>
+
+ 
+
+            <div class="col-12">
+
+                <button type="submit" class="dark-pink-button">Send Message</button>
+
+            </div>
 
         </form>
 
-       
+    </div>
 
  
 
-    <div id="formMessage"></div>
+    <footer>
+
+        <p><b>Email:</b> support@luggagetracker.com</p>
+
+        <p><b>Phone:</b> +123 456 7890</p>
+
+    </footer>
 
  
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        (function () {
+
+            'use strict'
+
+            var form = document.getElementById('contactForm');
 
  
 
-<footer>
+            form.addEventListener('submit', function (event) {
 
-    <p><b>Email:</b> support@luggagetracker.com</p>
-
-    <p><b>Phone:</b> +123 456 7890</p>
-
-</footer>
+                event.preventDefault();
 
  
+
+                if (!form.checkValidity()) {
+
+                    form.classList.add('was-validated');
+
+                } else {
+
+                    alert('Form submitted successfully!');
+
+                    form.reset();
+
+                    form.classList.remove('was-validated');
+
+                }
+
+            });
+
+        })();
+
+    </script>
 
 </body>
+
+ 
+
+</html>
 
  

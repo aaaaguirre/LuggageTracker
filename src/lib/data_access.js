@@ -2,11 +2,11 @@
 // import supabase client
 import { supabase } from './supabase.js'
 
-export async function get_all_luggages() {
+export async function get_all_details() {
     const result = await supabase
-    .from('luggages')
+    .from('details')
     .select('*')
-    .order('name', { ascending: true });
+    .order('flight_num', { ascending: true });
 
     if (result.error){
         console.log('get all luggages error: ${result.error}');
@@ -18,13 +18,12 @@ export async function get_all_luggages() {
 export async function get_all_events(order_col = 'luggage_id', order_dir = true){
     const result = await supabase
     .from('events')
-    .select('*, luggages(name)')
+    .select('*')
     .order(order_col, {ascending: order_dir});
 
     if (result.error){
         console.log('get all events error: ${result.error}');
     }
-
     return result.data;
 }
 
@@ -32,7 +31,7 @@ export async function get_events_by_luggage_id(luggage_id){
     const result = await supabase
     .from('events')
 
-    .select('*, luggages(name)')
+    .select('*, details(flight_num)')
     .eq('luggage_id', luggage_id)
     .order('timestamp', { ascending: true });
 
@@ -47,7 +46,7 @@ export async function delete_event_by_id(events_id){
     const result =  await supabase
     .from('events')
     .delete()
-    .eq('id', events_id)
+    .eq('events_id', events_id)
 
     if (result.error){
         console.log('get all events error: ${result.error}');
@@ -61,7 +60,7 @@ export async function delete_event_by_id(events_id){
 export async function search_events(search_text){
     const result = await supabase
     .from('events')
-    .select('*, luggages(name)')
+    .select('*, details(flight_num)')
     .or ('description.ilike.%${search_text}%,level.ilike.%${search_text}%')
     .order('timestamp', { ascending: true });
 

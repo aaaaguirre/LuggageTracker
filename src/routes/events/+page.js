@@ -2,15 +2,16 @@ import * as db from '$lib/data_access.js';
 
 export async function load({}) {
 
-    const luggages = await db.get_all_luggages();
+    const details = await db.get_all_details();
+    //console.log('details: ', details);
 
     const event = await db.get_all_events();
 
-    console.log(event);
+    
 
-    if (luggages && event){
+    if (details && event){
         return {
-            luggages: luggages,
+            details: details,
             events: event
         };
     }
